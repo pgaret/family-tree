@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router as BrowserRouter, Route } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import UserForm from './components/UserForm/UserForm';
+import { BrowserRouter, Route } from 'react-router-dom';
 import App from './App';
+import Login from './pages/Login/Login';
 
 ReactDOM.render(
     <BrowserRouter>
         <Route path='/' component={App} />
-        <Route path='/add-user' component={UserForm} />
+        <Route path='/login' component={Login} />
     </BrowserRouter>,
     document.getElementById('root')
 );

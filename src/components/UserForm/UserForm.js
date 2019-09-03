@@ -27,13 +27,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserForm = () => {
+export const UserForm = () => {
   const classes = useStyles();
   const newMember = {};
   const setValue = (field, value) => newMember[field] = value;
   const submitNewMember = async () => {
     console.log(newMember);
-    backendApi.postPerson(newMember);
+    const response = await backendApi.postPerson(newMember);
+    console.log(response);
   }
   return (
     <div>
