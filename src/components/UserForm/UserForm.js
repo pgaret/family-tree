@@ -27,15 +27,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const UserForm = ({ closeModal }) => {
+export const UserForm = ({ onSubmit, closeModal }) => {
   const classes = useStyles();
   const newMember = {};
   const setValue = (field, value) => newMember[field] = value;
   const submitNewMember = async () => {
-    console.log(newMember);
-    const response = await backendApi.postPerson(newMember);
-    console.log(response);
-    closeModal();
+      if (onSubmit) {
+        onSubmit(newMember);
+      } else {
+        const response = await backendApi.postPerson(newMember);
+        console.log(response);
+      }
+      closeModal();
   }
   return (
     <div>

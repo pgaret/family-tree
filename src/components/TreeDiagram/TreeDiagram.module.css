@@ -1,0 +1,7 @@
+.treeSection {
+    height: 100vh;
+}
+
+.nodeLabel {
+    border: solid 1px grey;
+}

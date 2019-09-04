@@ -10,14 +10,21 @@ import {
 	ListItemIcon,
 	ListItemText
 } from '@material-ui/core';
-import { InsertChartOutlined, Gavel } from '@material-ui/icons';
+import { Gavel } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import FormModal from '../FormModal';
+import UserForm from '../UserForm';
+import TreeForm from '../TreeForm';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
 	root: {
 		display: 'flex',
+	},
+	column: {
+		display: 'flex',
+		flexDirection: 'column'
 	},
 	drawer: {
 		[theme.breakpoints.up('sm')]: {
@@ -66,6 +73,12 @@ function TreeDrawer({ container, tests, history }) {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
+				<ListItem>
+					<FormModal buttonText='Add User' FormComponent={UserForm} />
+				</ListItem>
+				<ListItem>
+					<FormModal buttonText='Add Tree' FormComponent={TreeForm} />
+				</ListItem>
 				<ListItem button onClick={goToTests}>
 					<ListItemIcon className={classes.listItemIconRoot}><Gavel /></ListItemIcon>
 					<ListItemText primary='Trees' />

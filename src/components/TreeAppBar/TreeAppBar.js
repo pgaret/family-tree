@@ -52,7 +52,7 @@ const TreeAppBar = ({ loading, person, history }) => {
 			<AppBar position="fixed" className={classes.appBar}>
 				<Toolbar>
 					<Typography className={classes.title}>
-						FamilyTree
+						Tree
 					</Typography>
 					<IconButton
 						edge="start"

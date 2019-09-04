@@ -1,34 +1,46 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
-import FormModal from '../../components/FormModal/FormModal';
-import UserForm from '../../components/UserForm/UserForm';
-import TreeForm from '../../components/TreeForm/TreeForm';
+import { Typography } from '@material-ui/core';
 import backendApi from '../../backendApi';
 import TreeContainer from "../../components/TreeContainer/TreeContainer";
 
+import styles from './Main.module.css';
+import TreeDiagram from '../../components/TreeDiagram/TreeDiagram';
+
 const Main = () => {
     const [person, setPerson] = React.useState({});
-    const [tree, setTree] = React.useState({});
+    const [tree, setTree] = React.useState({ loading: true });
     const userId = sessionStorage.getItem('user');
     React.useEffect(() => {
         const getData = async() => {
             const userResponse = await backendApi.getPerson(userId);
-            console.log(userResponse);
             setPerson(userResponse.data);
+            console.log(userResponse.data.trees.length);
             if (userResponse.data.trees && userResponse.data.trees.length > 0) {
-                const treeResponse = await backendApi.getTree(userResponse.data.trees[0]._id);
+                console.log(userResponse.data.trees[0]);
+                const treeResponse = await backendApi.getTree(userResponse.data.trees[0]);
                 console.log(treeResponse)
                 setTree(treeResponse.data);
+            } else {
+                setTree({});
             }
         }
         getData();
-    }, [userId])
+    }, [userId]);
+
+    console.log(tree);
+
+    let title = 'You have no trees';
+    if (tree.loading) {
+        title = 'Loading...'
+    }
+    else if (tree._id) {
+        title = tree.name;
+    }
+
     return (
         <TreeContainer person={person} loading={!person._id}>
-            <Typography variant="h5">Main Page</Typography>
-            <FormModal buttonText='Add User' FormComponent={UserForm} />
-            <FormModal buttonText='Add Tree' FormComponent={TreeForm} />
-
+            <Typography variant="h5">{title}</Typography>
+            <TreeDiagram tree={tree} />
         </TreeContainer>
     );
 }
