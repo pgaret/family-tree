@@ -2,13 +2,14 @@ import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import backendApi from '../../backendApi';
 
-export const TreeForm = () => {
-    const userId = JSON.parse(sessionStorage.getItem('user'))._id;
+export const TreeForm = ({ closeModal }) => {
+    const userId = sessionStorage.getItem('user');
     const [name, setName] = React.useState('');
     const submitNewTree = async () => {
         console.log(name);
         const response = await backendApi.postTree(name, userId);
         console.log(response);
+        closeModal();
       }
     return (
         <div>

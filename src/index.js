@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 
 ReactDOM.render(
     <BrowserRouter>
-        <Route path='/' component={App} />
+        <Route exact path='/' component={App} />
         <Route path='/login' component={Login} />
     </BrowserRouter>,
     document.getElementById('root')

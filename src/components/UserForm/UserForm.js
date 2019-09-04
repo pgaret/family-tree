@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const UserForm = () => {
+export const UserForm = ({ closeModal }) => {
   const classes = useStyles();
   const newMember = {};
   const setValue = (field, value) => newMember[field] = value;
@@ -35,6 +35,7 @@ export const UserForm = () => {
     console.log(newMember);
     const response = await backendApi.postPerson(newMember);
     console.log(response);
+    closeModal();
   }
   return (
     <div>

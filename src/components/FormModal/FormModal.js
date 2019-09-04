@@ -40,6 +40,7 @@ const FormModal = ({ buttonText, onSubmit, FormComponent }) => {
 
   const handleClose = () => {
     setOpen(false);
+    onSubmit && onSubmit();
   };
 
   return (
@@ -52,7 +53,7 @@ const FormModal = ({ buttonText, onSubmit, FormComponent }) => {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-            <FormComponent onSubmit={onSubmit} />
+            <FormComponent onSubmit={onSubmit} closeModal={handleClose} />
         </div>
       </Modal>
     </div>
